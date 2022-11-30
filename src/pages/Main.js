@@ -7,7 +7,7 @@ import { AuthContext } from '../helpers/AuthContext';
 
 const Main = () => {
   // const [listOfPosts, setlistOfPosts] = useState([]);
-
+  let navigate = useNavigate();
 
   const [listOfPosts, setListOfPosts] = useState([]);
   // 158
@@ -25,11 +25,11 @@ const Main = () => {
   const [allegyData, setAllegyData] = useState([]);
   const allergyList = ['복숭아', '토마토', '홍합','밀가루','오징어','전복', '새우', '굴', '게', '고등어', '조개류', '땅콩', '메밀', '밀', '대두', '호두', '땅콩', '난류', '가금류', '우유', '쇠고기', '돼지고기', '닭고기'];
 
-  let navigate = useNavigate();
+
 
   useEffect(() => {
     // 163, 로그인 했는지 체크
-    if(!authState.status){
+    if(!localStorage.getItem("accessToken")){
       navigate('/login');
     } else {
       axios.get("https://allergy-check-app.herokuapp.com/posts",
@@ -66,7 +66,7 @@ const Main = () => {
   // }
 
   const getFoodsItem = () => {
-    axios.get(`https://openapi.foodsafetykorea.go.kr/api/7bb345a5cae7405fb10f/C002/json/1/10/PRDLST_NM=${inputItem}`).then((response) => {
+    axios.get(`https://openapi.foodsafetykorea.go.kr/api/7bb345a5cae7405fb10f/C002/json/1/10/PRDLST_NM=${inputItem}`).then((response) => { 
     
       let foodsArray = [];
       foodsArray = [...apiData, response.data.C002.row];
