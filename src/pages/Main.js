@@ -67,8 +67,9 @@ const Main = () => {
 
   const getFoodsItem = () => {
     axios.get(`https://openapi.foodsafetykorea.go.kr/api/7bb345a5cae7405fb10f/C002/json/1/10/PRDLST_NM=${inputItem}`).then((response) => {
-      
-    let foodsArray = [...apiData, response.data.C002.row];
+    
+      let foodsArray = [];
+      foodsArray = [...apiData, response.data.C002.row];
       setApiData(foodsArray[0]);
       setApiCheck(true);
       // console.log(foodsArray[0]);
