@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -13,10 +13,9 @@ const Main = () => {
   // 158
   const [likedPosts, setLikedPosts] = useState([]);
   //163
-  const { authState } = useContext(AuthContext);
+  // const { authState } = useContext(AuthContext);
 
   // data api
-  
   const [apiData, setApiData] = useState([]);
   const [apiCheck, setApiCheck] = useState(false);
   const [inputItem, setInputItem] = useState("");
@@ -24,8 +23,6 @@ const Main = () => {
   // 알레르기 저장
   const [allegyData, setAllegyData] = useState([]);
   const allergyList = ['복숭아', '토마토', '홍합','밀가루','오징어','전복', '새우', '굴', '게', '고등어', '조개류', '땅콩', '메밀', '밀', '대두', '호두', '땅콩', '난류', '가금류', '우유', '쇠고기', '돼지고기', '닭고기'];
-
-
 
   useEffect(() => {
     // 163, 로그인 했는지 체크
@@ -65,20 +62,31 @@ const Main = () => {
     
   // }
 
-  const getFoodsItem = () => {
-    axios.get(`https://openapi.foodsafetykorea.go.kr/api/7bb345a5cae7405fb10f/C002/json/1/10/PRDLST_NM=${inputItem}`).then((response) => { 
-    
-      let foodsArray = [];
-      foodsArray = [...apiData, response.data.C002.row];
-      setApiData(foodsArray[0]);
-      setApiCheck(true);
-      // console.log(foodsArray[0]);
-      // console.log(foodsArray[0][0].RAWMTRL_NM);
-      setAllegyData(foodsArray[0][0].RAWMTRL_NM);
-    }).catch((error)=>{
-      console.log(error);
-    });
-    
+  const getFoodsItem = async () => {
+    if (inputItem) {
+      await axios
+        .get(
+          `https://openapi.foodsafetykorea.go.kr/api/7bb345a5cae7405fb10f/C002/json/1/10/PRDLST_NM=${inputItem}`
+        )
+        .then((response) => {
+          let apiData = [];
+          let foodsArray = [];
+          foodsArray = [...apiData, response.data.C002.row];
+          setApiData(foodsArray[0]);
+          setApiCheck(true);
+          // console.log(foodsArray[0]);
+          if (foodsArray && foodsArray.length > 0) {
+            setAllegyData(foodsArray[0][0].RAWMTRL_NM);
+          } else {
+            console.log("nope");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert('검색어를 입력해주세요.');
+    }
   };
 
   const likeAPost = (postId) => {
@@ -192,14 +200,40 @@ const ApiFoodsData = (props) => {
       <ul className="apiFoodsTable">
         {
           props.apiData.map((value, key) => {
+            let splitRawmtrlList = value.RAWMTRL_NM.split(',');
+            let foodRawName = document.querySelector('.apiFoodsRawInfo');
+            // for(var i=0; i<splitRawmtrlList.length; i++){
+            //   if(splitRawmtrlList[i] == '우유'){
+            //     console.log(splitRawmtrlList[i]);
+            //     foodRawName.innerHTML="<h1>"+num.fontcolor("blue")+"은(는) 5의 배수가 <font color='blue'>맞습니다.</font></h1>";
+            //   } else {
+            //     console.log('nope');
+            //   }
+            // }
             return(
               <div key={key}>
                 <li>
                   <p className="apiFoodsId">{key}</p>
                   <p className="apiFoodsName">품목명:<br/>{value.PRDLST_NM}</p>
                   <div className="apiFoodsRawInfo">
-                    <p className="apiFoodsDcnm">유형: {value.PRDLST_DCNM	}</p>
-                    <p className="apiFoodsRawName">원재료: {value.RAWMTRL_NM}</p>
+                    <p className="apiFoodsDcnm">유형: {value.PRDLST_DCNM}</p>
+                    {
+                      splitRawmtrlList.map((str, i)=>{
+                        return(
+                          <div key={i}>
+                            {str == '우유' ? 
+                              <p className="apiFoodsRawName" style={{color:'red',fontWeight:'bold',textDecoration:'underline',fontSize:'1.3em'}}>
+                                {str}
+                              </p> : 
+                              <p className="apiFoodsRawName">
+                                {str}
+                              </p>
+                            }
+                            
+                          </div>
+                        )
+                      })
+                    }
                   </div>
                   </li>
                   {/* console.log(props.allergyList[key]); */}
