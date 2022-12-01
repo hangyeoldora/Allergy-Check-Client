@@ -221,7 +221,7 @@ const ApiFoodsData = (props) => {
                       splitRawmtrlList.map((str, i)=>{
                         return(
                           <div key={i}>
-                            {str == '우유' ? 
+                            {str == '땅콩' ? 
                               <p className="apiFoodsRawName" style={{color:'red',fontWeight:'bold',textDecoration:'underline',fontSize:'1.3em'}}>
                                 {str}
                               </p> : 

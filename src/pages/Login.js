@@ -26,17 +26,23 @@ const Login = () => {
         })
     }
   return (
-    <div className="writePage">
-        <label>Username: </label>
-        <input type="text" onChange={(e)=>{
-            setUsername(e.target.value);
-        }}/>
-        <label>Password: </label>
-        <input type="password" onChange={(e)=>{
-            setPassword(e.target.value);
-        }}/>
-
-        <button onClick={login}>Login</button>
+    <div className="loginPage">
+        <img src={process.env.PUBLIC_URL+"/banner/login-banner.jpg"} />
+        <div className="loginContainer">
+            <div className="loginSection">
+                <img className="login-logo" src={process.env.PUBLIC_URL +"/logo/dongseo_logo.png"} />
+                <p className="login-welcome">Welcome Back</p>
+                <label>Username: </label>
+                <input type="text" onChange={(e)=>{
+                    setUsername(e.target.value);
+                }} placeholder=" ID를 입력하세요" />
+                <label>Password: </label>
+                <input type="password" placeholder=" PW를 입력하세요" onChange={(e)=>{
+                    setPassword(e.target.value);
+                }}/>
+                <a className="login-btn" onClick={login}>Login</a>
+            </div>
+        </div>
     </div>
   )
 }
