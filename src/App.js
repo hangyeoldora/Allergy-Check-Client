@@ -116,7 +116,7 @@ const App = () => {
                               className="nav_logo"
                               src={
                                 process.env.PUBLIC_URL +
-                                "/logo/dongseo_logo.png"
+                                "/logo/allergy-logo.png"
                               }
                             />
                           </Link>
