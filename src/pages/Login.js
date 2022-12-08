@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate  } from 'react-router-dom';
@@ -27,10 +28,10 @@ const Login = () => {
     }
   return (
     <div className="loginPage">
-        <img src={process.env.PUBLIC_URL+"/banner/login-banner.jpg"} />
+        <img src={process.env.PUBLIC_URL+"/banner/login-banner.jpg"} alt="login page banner" />
         <div className="loginContainer">
             <div className="loginSection">
-                <img className="login-logo" src={process.env.PUBLIC_URL +"/logo/dongseo_logo.png"} />
+                {/* <img className="login-logo" src={process.env.PUBLIC_URL +"/logo/dongseo_logo.png"} /> */}
                 <p className="login-welcome">Welcome Back</p>
                 <label>Username: </label>
                 <input type="text" onChange={(e)=>{
