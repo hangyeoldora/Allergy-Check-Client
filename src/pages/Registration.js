@@ -28,7 +28,7 @@ const Registration = () => {
   // username, password 받음
   const onSubmit = (data) => {
     axios
-      .post("https://allergy-check-app.herokuapp.com/auth", data)
+      .post("https://allergy-check-server.onrender.com/auth", data)
       .then(() => {
         console.log(data);
         navigate("/");

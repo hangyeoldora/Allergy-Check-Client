@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useContext, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -32,7 +33,7 @@ const Write = () => {
 
   // 165 이후
   const onSubmit = (data) =>{
-    axios.post('https://allergy-check-app.herokuapp.com/posts', data, {
+    axios.post('https://allergy-check-server.onrender.com/posts', data, {
         headers: {accessToken: localStorage.getItem("accessToken")}
     }).then((response)=>{
       navigate('/');

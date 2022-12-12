@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -15,11 +16,11 @@ const Post = () => {
 
   useEffect(() => {
     // data 가져오기 (Home.js에서)
-    axios.get(`https://allergy-check-app.herokuapp.com/posts/byId/${id}`).then((response) => {
+    axios.get(`https://allergy-check-server.onrender.com/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
     // comment 가져오기 (commnets.js)
-    axios.get(`https://allergy-check-app.herokuapp.com/comments/${id}`).then((response) => {
+    axios.get(`https://allergy-check-server.onrender.com/comments/${id}`).then((response) => {
       setComments(response.data);
     });
   }, []);
@@ -27,7 +28,7 @@ const Post = () => {
   const addComment = () => {
     axios
       .post(
-        "https://allergy-check-app.herokuapp.com/comments",
+        "https://allergy-check-server.onrender.com/comments",
         { commentBody: newComment, PostId: id },
         //97
         {
@@ -56,7 +57,7 @@ const Post = () => {
 
   // 133 comment.id를 파라미터로 받기
   const deleteComment = (id) => {
-    axios.delete(`https://allergy-check-app.herokuapp.com/comments/${id}`, {
+    axios.delete(`https://allergy-check-server.onrender.com/comments/${id}`, {
       // 유효성 인증을 위해 header
       headers: {accessToken: localStorage.getItem('accessToken')},
     }).then(()=> {
