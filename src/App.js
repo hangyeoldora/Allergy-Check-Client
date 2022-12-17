@@ -23,7 +23,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("https://allergy-check-server.onrender.com/auth/checkUser", {
+      .get("http://localhost:3001/auth/checkUser", {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

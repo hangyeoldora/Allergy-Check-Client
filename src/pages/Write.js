@@ -33,7 +33,7 @@ const Write = () => {
 
   // 165 이후
   const onSubmit = (data) =>{
-    axios.post('https://allergy-check-server.onrender.com/posts', data, {
+    axios.post('http://localhost:3001/posts', data, {
         headers: {accessToken: localStorage.getItem("accessToken")}
     }).then((response)=>{
       navigate('/');

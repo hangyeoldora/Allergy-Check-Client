@@ -29,7 +29,7 @@ const Main = () => {
     if(!localStorage.getItem("accessToken")){
       navigate('/login');
     } else {
-      axios.get("https://allergy-check-server.onrender.com/posts",
+      axios.get("http://localhost:3001/posts",
       // 157
       { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
         // console.log(response.data);
@@ -49,7 +49,7 @@ const Main = () => {
   
   // const getFoodsItem = () => {
   //   searchItem = inputItem;
-  //   axios.get(`https://allergy-check-server.onrender.com/api/byId/${searchItem}`).then((response) => {
+  //   axios.get(`http://localhost:3001/api/byId/${searchItem}`).then((response) => {
       
   //   let foodsArray = [...apiData, response.data.C002.row];
   //     setApiData(foodsArray);
@@ -92,7 +92,7 @@ const Main = () => {
   const likeAPost = (postId) => {
     axios
       .post(
-        "https://allergy-check-server.onrender.com/likes",
+        "http://localhost:3001/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )

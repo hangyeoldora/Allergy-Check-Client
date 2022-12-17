@@ -47,5 +47,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://allergy-check-server.onrender.com"
+  "proxy": "http://localhost:3001"
 }

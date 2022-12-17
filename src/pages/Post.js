@@ -16,11 +16,11 @@ const Post = () => {
 
   useEffect(() => {
     // data 가져오기 (Home.js에서)
-    axios.get(`https://allergy-check-server.onrender.com/posts/byId/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
     // comment 가져오기 (commnets.js)
-    axios.get(`https://allergy-check-server.onrender.com/comments/${id}`).then((response) => {
+    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
       setComments(response.data);
     });
   }, []);
@@ -28,7 +28,7 @@ const Post = () => {
   const addComment = () => {
     axios
       .post(
-        "https://allergy-check-server.onrender.com/comments",
+        "http://localhost:3001/comments",
         { commentBody: newComment, PostId: id },
         //97
         {
@@ -57,7 +57,7 @@ const Post = () => {
 
   // 133 comment.id를 파라미터로 받기
   const deleteComment = (id) => {
-    axios.delete(`https://allergy-check-server.onrender.com/comments/${id}`, {
+    axios.delete(`http://localhost:3001/comments/${id}`, {
       // 유효성 인증을 위해 header
       headers: {accessToken: localStorage.getItem('accessToken')},
     }).then(()=> {
