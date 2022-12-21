@@ -30,7 +30,7 @@ const Login = () => {
     <div className="loginPage">
         <img src={process.env.PUBLIC_URL+"/banner/login-banner.jpg"} alt="login page banner" />
         <div className="loginContainer">
-            <div className="loginSection">
+            <form className="loginSection">
                 {/* <img className="login-logo" src={process.env.PUBLIC_URL +"/logo/dongseo_logo.png"} /> */}
                 <p className="login-welcome">Welcome Back</p>
                 <label>Username: </label>
@@ -38,11 +38,11 @@ const Login = () => {
                     setUsername(e.target.value);
                 }} placeholder=" ID를 입력하세요" />
                 <label>Password: </label>
-                <input type="password" placeholder=" PW를 입력하세요" onChange={(e)=>{
+                <input type="password" name="password" autoComplete="on" placeholder="PW를 입력하세요" onChange={(e)=>{
                     setPassword(e.target.value);
                 }}/>
                 <a className="login-btn" onClick={login}>Login</a>
-            </div>
+            </form>
         </div>
     </div>
   )
