@@ -202,14 +202,7 @@ const ApiFoodsData = (props) => {
           props.apiData.map((value, key) => {
             let splitRawmtrlList = value.RAWMTRL_NM.split(',');
             let foodRawName = document.querySelector('.apiFoodsRawInfo');
-            // for(var i=0; i<splitRawmtrlList.length; i++){
-            //   if(splitRawmtrlList[i] == '우유'){
-            //     console.log(splitRawmtrlList[i]);
-            //     foodRawName.innerHTML="<h1>"+num.fontcolor("blue")+"은(는) 5의 배수가 <font color='blue'>맞습니다.</font></h1>";
-            //   } else {
-            //     console.log('nope');
-            //   }
-            // }
+
             return(
               <div key={key}>
                 <li>
@@ -221,7 +214,9 @@ const ApiFoodsData = (props) => {
                       splitRawmtrlList.map((str, i)=>{
                         return(
                           <div key={i}>
-                            {str == '땅콩' ? 
+                            {/* 알러지 항목에 포함되어 있는지 확인 */}
+                            {str in allergyList ? 
+                            // inline -> class에 add active 필요
                               <p className="apiFoodsRawName" style={{color:'red',fontWeight:'bold',textDecoration:'underline',fontSize:'1.3em'}}>
                                 {str}
                               </p> : 
@@ -236,11 +231,8 @@ const ApiFoodsData = (props) => {
                     }
                   </div>
                   </li>
-                  {/* console.log(props.allergyList[key]); */}
-                  {/* {console.log(value[key].RAWMTRL_NM)} */}
               </div>
             )
-            
           })
         }
       </ul>
